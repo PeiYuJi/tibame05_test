@@ -1,3 +1,12 @@
+Metadata-Version: 2.1
+Name: etf-lab
+Version: 0.0.1
+Summary: ETF lab crawler and database
+Author: peiyuji
+Author-email: abc0970870@gmail.com
+Classifier: Development Status :: 3 - Alpha
+Description-Content-Type: text/markdown
+
 # crawler
 
 # 環境設定
@@ -38,7 +47,7 @@
 
 #### 發送任務
 
-    pipenv run python crawler/producer_main_us.py
+    pipenv run python crawler/producer.py
 
 #### for loop 發送多個任務
 
@@ -153,7 +162,3 @@
 
 #### 輸入 Secret Manager
     pipenv run python crawler/print_secret_manager.py
-
-
-#### 刪除clone的東西
-rm -rf test
