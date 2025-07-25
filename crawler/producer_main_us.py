@@ -11,12 +11,12 @@ if __name__ == "__main__":
 
 
     print("歷史價格")
-    crawler_etf_us = crawler_etf_us.apply_async(url=us_etf_url, queue='etfus')
+    #crawler_etf_us = crawler_etf_us.apply_async(url=us_etf_url, queue='etfus')
 
 
     print("技術指標與績效分析")
-    backtest_utils_us = backtest_utils_us.apply_async(url=us_etf_url, queue='etfus')
+    #backtest_utils_us = backtest_utils_us.apply_async(url=us_etf_url, queue='etfus')
 
 
     print("配息資料")
-    crawler_etf_dps_us = crawler_etf_dps_us.apply_async(url=us_etf_url, queue='etfus')
+    #crawler_etf_dps_us = crawler_etf_dps_us.apply_async(url=us_etf_url, queue='etfus')
