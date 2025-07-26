@@ -33,7 +33,7 @@ services:
           - mysql:db
       restart: always  # 若容器停止或崩潰，自動重新啟動
       ports:
-          - 8000:80
+          - 8080:80
       depends_on:
         - mysql
       networks:
