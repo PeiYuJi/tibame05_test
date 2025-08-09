@@ -47,7 +47,7 @@ with engine_no_db.connect() as conn:
 # )
 
 engine = create_engine(
-    f"mysql+pymysql://{MYSQL_ACCOUNT}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/etf_test",
+    f"mysql+pymysql://{MYSQL_ACCOUNT}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/etf",
     # echo=True,  # 所有 SQL 指令都印出來（debug 用）
     pool_pre_ping=True,  # 連線前先 ping 一下，確保連線有效
 )

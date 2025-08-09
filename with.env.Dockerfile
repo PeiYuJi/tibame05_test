@@ -36,3 +36,6 @@ RUN ENV=DOCKER python3 genenv.py
 
 # 啟動容器後，預設執行 bash（開啟終端）
 CMD ["/bin/bash"]
+
+
+RUN pipenv install selenium==4.27.1
