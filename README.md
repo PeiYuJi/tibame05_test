@@ -86,7 +86,7 @@
     
 #### 建立 network
 
-    docker network create my_network
+    docker network create etf_lib_network
 
 #### 啟動 rabbitmq
 
@@ -127,6 +127,10 @@
     DOCKER_IMAGE_VERSION=0.0.6 docker compose -f docker-compose-producer-duplicate-network-version.yml up -d
 
     DOCKER_IMAGE_VERSION=0.0.10 docker compose -f docker-compose-producer-network.yml up -d
+
+
+DOCKER_IMAGE_VERSION=0.0.10. docker stack deploy --with-registry-auth -c docker-compose-worker-network.yml -d
+
 
 #### 查看 docker container 狀況
 
