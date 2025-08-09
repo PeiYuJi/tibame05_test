@@ -20,6 +20,7 @@ COPY ./Pipfile /crawler
 COPY ./Pipfile.lock /crawler
 COPY ./README.md /crawler
 COPY ./local.ini /crawler
+COPY ./database /crawler/database
 
 # 設定容器的工作目錄為 /crawler，後續的指令都在這個目錄下執行
 WORKDIR /crawler/
