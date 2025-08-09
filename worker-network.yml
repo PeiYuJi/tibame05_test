@@ -2,7 +2,7 @@ version: '3.0'  # 使用 Docker Compose 的版本 3.0，適合大部分部署場
 
 services:
   crawler_worker:  # 定義一個服務，名稱為 crawler_twse
-    image: tibame05/web_crawler_tw:${DOCKER_IMAGE_VERSION}  # 使用的映像檔名稱與標籤（版本）
+    image: winston07291/web_crawler_tw:${DOCKER_IMAGE_VERSION}  # 使用的映像檔名稱與標籤（版本）
     hostname: "crawler_worker"  # 設定 hostname
     command: pipenv run celery -A crawler.worker worker --loglevel=info --hostname=%h 
     # 啟動容器後執行的命令，這裡是啟動 Celery worker，指定 app 為 crawler.worker，設定日誌等級為 info，

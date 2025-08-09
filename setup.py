@@ -11,10 +11,10 @@ setup(
     description="ETF lab crawler and database",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    author="peiyuji",
-    author_email="abc0970870@gmail.com",
+    author="joycehsu, winstonlu",
+    author_email="egroup.joyce@gmail.com, apollo07291@gmail.com",
     classifiers=[
         "Development Status :: 3 - Alpha",
     ],
-    packages=["crawler"],
+    packages=["crawler", "database"],
 )
