@@ -38,8 +38,10 @@
 
 #### 發送任務
 
-    pipenv run python crawler/producer.py
+    pipenv run python crawler/producer_main_tw.py
+    pipenv run python crawler/producer_main_us.py
 
+    
 #### for loop 發送多個任務
 
     pipenv run python crawler/producer_crawler_finmind.py
@@ -109,6 +111,7 @@
     DOCKER_IMAGE_VERSION=0.0.5 docker compose -f docker-compose-worker-network-version.yml up -d
     DOCKER_IMAGE_VERSION=0.0.6 docker compose -f docker-compose-worker-network-version.yml up -d
 
+   DOCKER_IMAGE_VERSION=0.0.10 docker compose -f docker-compose-worker-network.yml up -d
 #### 關閉 worker
 
     docker compose -f docker-compose-worker-network.yml down
@@ -122,6 +125,8 @@
     DOCKER_IMAGE_VERSION=0.0.3 docker compose -f docker-compose-producer-network-version.yml up -d
     DOCKER_IMAGE_VERSION=0.0.5 docker compose -f docker-compose-producer-network-version.yml up -d
     DOCKER_IMAGE_VERSION=0.0.6 docker compose -f docker-compose-producer-duplicate-network-version.yml up -d
+
+    DOCKER_IMAGE_VERSION=0.0.10 docker compose -f docker-compose-producer-network.yml up -d
 
 #### 查看 docker container 狀況
 
