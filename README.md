@@ -188,3 +188,6 @@ DOCKER_IMAGE_VERSION=0.0.10. docker stack deploy --with-registry-auth -c docker-
 
 
     DOCKER_IMAGE_VERSION=0.0.10 docker stack deploy --with-registry-auth -c docker-compose-worker-network.yml upload
+
+
+     DOCKER_IMAGE_VERSION=0.0.10 docker stack deploy --with-registry-auth -c producer-network.yml upload
