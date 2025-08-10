@@ -66,6 +66,7 @@
     docker build -f prod.with.env.Dockerfile -t peiyuji/web_crawler:0.0.8.composer .
     docker build -f with.env.Dockerfile -t peiyuji/web_crawler:0.0.9 .
 
+    docker build -f with.env.Dockerfile -t peiyuji/web_crawler:0.0.8 .
     docker build -f with.env.Dockerfile -t peiyuji/web_crawler:0.0.10 .
 
 #### push docker image
@@ -81,6 +82,7 @@
     docker push peiyuji/web_crawler:0.0.8.composer
     docker push peiyuji/web_crawler:0.0.9
 
+    docker push peiyuji/web_crawler:0.0.8
     docker push peiyuji/web_crawler:0.0.10
 
     

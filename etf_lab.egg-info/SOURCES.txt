@@ -11,6 +11,7 @@ crawler/tasks_crawler_etf_tw.py
 crawler/tasks_crawler_etf_us.py
 crawler/tasks_etf_list_tw.py
 crawler/tasks_etf_list_us.py
+crawler/upload_taiwan_stock_price_to_mysql.py
 crawler/worker.py
 database/__init__.py
 database/config.py
