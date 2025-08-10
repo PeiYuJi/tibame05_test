@@ -1,0 +1,17 @@
+version: '3.0'  # 使用 Docker Compose 的版本 3.0，適合大部分部署場景
+
+services:
+  producer_multi_queue:  # 定義一個服務，名稱為 crawler_twse
+    image: linsamtw/tibame_crawler:${DOCKER_IMAGE_VERSION}  # 使用的映像檔名稱與標籤（版本）
+    hostname: "twse"  # 設定 hostname = twse
+    command: pipenv run python crawler/producer_multi_queue.py
+    # restart: always  # 若容器停止或崩潰，自動重新啟動
+    environment:
+      - TZ=Asia/Taipei  # 設定時區為台北（UTC+8）
+    networks:
+      - etf_lib_network  # 將此服務連接到 my_network 網路
+
+networks:
+  etf_lib_network:
+    # 加入已經存在的網路
+    external: true
