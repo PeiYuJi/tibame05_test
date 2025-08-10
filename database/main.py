@@ -35,7 +35,7 @@ engine_no_db = create_engine(
 with engine_no_db.connect() as conn:
     conn.execute(
         text(
-            "CREATE DATABASE IF NOT EXISTS etf_test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
+            "CREATE DATABASE IF NOT EXISTS etf CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;"
         )
     )
 
