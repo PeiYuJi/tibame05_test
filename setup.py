@@ -12,7 +12,7 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     author="peiyuji",
-    author_email="peiyuji0424@gmail.com",
+    author_email="abc0970870@gmail.com",
     classifiers=[
         "Development Status :: 3 - Alpha",
     ],
