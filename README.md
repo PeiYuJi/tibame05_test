@@ -174,3 +174,7 @@ DOCKER_IMAGE_VERSION=0.0.10. docker stack deploy --with-registry-auth -c docker-
 
 
  docker stack deploy --with-registry-auth -c docker-compose-upload_taiwan_stock_price_to_mysql.yml mysql
+
+
+
+    DOCKER_IMAGE_VERSION=0.0.10 docker compose -f producer-network.yml up -d
