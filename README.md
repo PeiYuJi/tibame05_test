@@ -169,3 +169,8 @@ DOCKER_IMAGE_VERSION=0.0.10. docker stack deploy --with-registry-auth -c docker-
 
 #### 輸入 Secret Manager
     pipenv run python crawler/print_secret_manager.py
+
+
+
+
+ docker stack deploy --with-registry-auth -c docker-compose-upload_taiwan_stock_price_to_mysql.yml mysql
