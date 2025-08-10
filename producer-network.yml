@@ -14,7 +14,7 @@ services:
   crawler_us_producer:  # 定義一個服務
     image: peiyuji/web_crawler:${DOCKER_IMAGE_VERSION}  # 使用的映像檔名稱與標籤（版本）
     hostname: "crawler_us_producer"  # 設定 hostname
-    command: pipenv run python crawler/producer_main_us.py
+    command: pipenv run python -m crawler/producer_main_us.py
     # restart: always  # 若容器停止或崩潰，自動重新啟動
     environment:
       - TZ=Asia/Taipei  # 設定時區為台北（UTC+8）
