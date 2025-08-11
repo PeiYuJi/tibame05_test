@@ -17,6 +17,6 @@ services:
       - etf_lib_network  # 將此服務連接到 my_swarm_network 網路
 
 networks:
-  my_swarm_network:
+  etf_lib_network:
     # 加入已經存在的網路
     external: true
