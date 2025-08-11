@@ -1,5 +1,5 @@
 # crawler
-
+    pipenv install python-dotenv
 # 環境設定
 
 #### 安裝 pipenv
