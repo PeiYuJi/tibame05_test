@@ -1,48 +1,53 @@
-version: '3.3'
+version: '3'  # 指定 Docker Compose 檔案版本，3 以上支援 Swarm deploy
 services:
 
   mysql:
-      image: mysql:8.0
-      # 設定 mysql 使用原生認證的密碼 hash
-      command: mysqld --default-authentication-plugin=mysql_native_password
-      ports: 
-        # docker publish port 3306 to 3306 
-        # (將 docker 內部 ip 3306, 跟外部 3306 做連結)
-          - 3306:3306
-        # - target: 3306
-        #   published: 3306
-        #   mode: host
-      environment: # 環境變數, 設置 db, user, password, root_password
-          MYSQL_DATABASE: etf
-          MYSQL_USER: user
-          MYSQL_PASSWORD: test
-          MYSQL_ROOT_PASSWORD: test
-      restart: always  # 若容器停止或崩潰，自動重新啟動
-      volumes:
-          - mysql:/var/lib/mysql
-          # share volumes of docker container to outside volume, 
-          # let data persist
-          # 將 docker container 的 volumes 跟外部 volumes 做連結, 
-          # 讓資料不會因為, container close or update, 而遺失
-      networks:
-          - etf_lib_network
+    image: mysql:8.0  # 使用官方 MySQL 8.0 映像
+    command: mysqld --default-authentication-plugin=mysql_native_password  
+      # 設定 MySQL 採用舊的密碼驗證插件，避免一些應用連線問題
+    ports:
+      - 3306:3306  # 對外開放資料庫埠（3306）
+    environment:
+      MYSQL_DATABASE: etf           # 啟動時自動建立的資料庫
+      MYSQL_USER: user              # 建立一個普通用戶
+      MYSQL_PASSWORD: test          # 該用戶的密碼
+      MYSQL_ROOT_PASSWORD: test     # root 用戶密碼
+    volumes:
+      - mysql:/var/lib/mysql        # 將資料庫資料持久化到 volume
+    # 以下是 Docker Swarm 模式的設定
+    deploy:
+      mode: replicated              # 使用 replicated 模式，非 global
+      replicas: 1                   # 執行 1 個副本
+      placement:
+        constraints: [node.labels.mysql==true]
+    networks:
+      - etf_lib_network            # 加入定義好的 overlay 網路
 
   phpmyadmin:
-      image: phpmyadmin/phpmyadmin:5.1.0
-      links: 
-          - mysql:db
-      restart: always  # 若容器停止或崩潰，自動重新啟動
-      ports:
-          - 8000:80
-      depends_on:
-        - mysql
-      networks:
-          - etf_lib_network
+    image: phpmyadmin:5.1.0  # 使用 phpMyAdmin 介面映像
+    links: 
+      - mysql:db                   # 將 mysql 服務別名為 db
+    ports:
+      - 8080:80                    # 對外開放 phpMyAdmin 介面為 8080
+    environment:
+      MYSQL_USER: user             # 登入用戶
+      MYSQL_PASSWORD: test         # 密碼
+      MYSQL_ROOT_PASSWORD: test    # root 密碼（其實 PMA_HOST 就足夠）
+      PMA_HOST: mysql              # 指定 phpMyAdmin 要連的 MySQL 主機（服務名）
+      UPLOAD_LIMIT: 4096M         # ✅ 官方支援，會設置 upload/post 大小
+    depends_on:
+      - mysql                      # 確保 phpMyAdmin 會等 mysql 啟動
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints: [node.labels.mysql==true]
+    networks:
+      - etf_lib_network           # 同樣加入 overlay 網路
 
 networks:
   etf_lib_network:
-    # 加入已經存在的網路
-    external: true
+    external: true                 # 使用外部建立的 overlay 網路（需先執行 create）
 
 volumes:
   mysql:
