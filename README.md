@@ -1,5 +1,18 @@
 # crawler
     pipenv install python-dotenv
+    pipenv install beautifulsoup4
+    pipenv install yfinance
+pipenv install pandas
+pipenv install requests
+pipenv install selenium
+pipenv install beautifulsoup4
+pipenv install pandas_ta
+
+
+pipenv install selenium==4.27.1
+
+
+
 # 環境設定
 
 #### 安裝 pipenv

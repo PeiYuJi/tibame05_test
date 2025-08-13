@@ -21,6 +21,8 @@ if __name__ == "__main__":
     etfs = scrape_etf_list.apply_async(
         kwargs={"save_csv": SAVE_CSV}, queue="etftw"
     )
+    print("etfs type:", type(etfs))
+    print("etfs content:", etfs)
     etfs_df = pd.DataFrame(etfs)
     print(f"爬取到 {len(etfs_df)} 筆 ETF 資料")
     print("✅ 爬取到所有 ETF list")
