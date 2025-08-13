@@ -20,7 +20,7 @@ if __name__ == "__main__":
     print("開始 0️⃣ 爬 ETF 清單")
     etfs = scrape_etf_list.apply_async(
         kwargs={"save_csv": SAVE_CSV}, queue="etftw"
-    ).get()
+    )
     etfs_df = pd.DataFrame(etfs)
     print(f"爬取到 {len(etfs_df)} 筆 ETF 資料")
     print("✅ 爬取到所有 ETF list")
