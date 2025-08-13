@@ -10,7 +10,7 @@ if __name__ == "__main__":
     print("ETF 清單")
     etf_list_us.apply_async(
         kwargs={"url": us_etf_url}, queue="etfus"
-    ).get()  # 使用 apply_async 發送任務到 RabbitMQ
+    )  # 使用 apply_async 發送任務到 RabbitMQ
     # etf_list_us = etf_list_us(us_etf_url)  # 直接呼叫函式
 
     print("歷史價格")
