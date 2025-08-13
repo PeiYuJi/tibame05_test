@@ -19,10 +19,8 @@ if __name__ == "__main__":
     # 0️⃣ 先爬 ETF 清單（名稱與代號），並儲存成 etf_list.csv
     print("開始 0️⃣ 爬 ETF 清單")
     etfs = scrape_etf_list.apply_async(
-        kwargs={"save_csv": SAVE_CSV}, queue="etftw"
-    )
-    print("etfs type:", type(etfs))
-    print("etfs content:", etfs)
+        kwargs={"save_csv": SAVE_CSV}, queue="crawler_tw"
+    ).get()
     etfs_df = pd.DataFrame(etfs)
     print(f"爬取到 {len(etfs_df)} 筆 ETF 資料")
     print("✅ 爬取到所有 ETF list")
@@ -39,7 +37,7 @@ if __name__ == "__main__":
             # === 1️⃣ 抓歷史價格 + 技術指標計算 ===
             # df_price = crawler_etf_daily_price.apply_async(args=[ticker], queue="crawler_tw").get()
             daily_price = crawler_etf_daily_price.apply_async(
-                args=[ticker], queue="etftw"
+                args=[ticker], queue="crawler_tw"
             ).get()
             df_price = pd.DataFrame(daily_price)
             print(df_price.head())   # ← 檢查歷史價格資料
@@ -52,19 +50,19 @@ if __name__ == "__main__":
             df_price["date"] = pd.to_datetime(df_price["date"])
             # df_combined = calculate_indicators.apply_async(args=[df_price], queue="crawler_tw").get()
             combined = calculate_indicators.apply_async(
-                args=[df_price], queue="etftw"
+                args=[df_price], queue="crawler_tw"
             ).get()
             df_combined = pd.DataFrame(combined)
             print(f"✅ {ticker} 歷史價格與技術指標已儲存")
 
             # === 2️⃣ 抓配息資料 ===
             # df_dividend = crawler_etf_dividend.apply_async(args=[ticker], queue="crawler_tw").get()
-            crawler_etf_dividend.apply_async(args=[ticker], queue="etftw")
+            crawler_etf_dividend.apply_async(args=[ticker], queue="crawler_tw")
 
             # === 3️⃣ 績效分析 ===
             # metrics = evaluate_performance.apply_async(args=[df_combined]).get()
             evaluate_performance.apply_async(
-                args=[df_combined, ticker], queue="etftw"
+                args=[df_combined, ticker], queue="crawler_tw"
             )
 
         except Exception as e:
