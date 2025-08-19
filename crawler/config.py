@@ -5,9 +5,6 @@ import os
 # 載入 .env 檔案
 load_dotenv()
 
-# 指定 .env 路徑
-env_path = Path(__file__).resolve().parents[1] / ".env"
-load_dotenv(dotenv_path=env_path)
 
 RABBITMQ_HOST = os.environ.get("RABBITMQ_HOST", "rabbitmq")
 RABBITMQ_PORT = os.environ.get("RABBITMQ_PORT", 15672)
