@@ -11,7 +11,7 @@ pipenv install pandas_ta
 
 pipenv install selenium==4.27.1
 
-
+pipenv install python-dotenv
 
 # 環境設定
 
