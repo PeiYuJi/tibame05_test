@@ -13,6 +13,17 @@ pipenv install selenium==4.27.1
 
 pipenv install python-dotenv
 
+在專案目錄中建立虛擬環境：
+python3 -m venv venv
+
+啟動虛擬環境：
+source venv/bin/activate
+
+安裝套件：
+pip install beautifulsoup4
+
+
+
 # 環境設定
 
 #### 安裝 pipenv
@@ -212,4 +223,4 @@ DOCKER_IMAGE_VERSION=0.0.10. docker stack deploy --with-registry-auth -c docker-
 
 
      wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-sudo apt install -y ./google-chrome-stable_current_amd64.deb
+sudo apt install -y ./google-chrome-stable_current_amd64.debv
