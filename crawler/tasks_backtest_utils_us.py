@@ -3,7 +3,8 @@ import yfinance as yf
 from bs4 import BeautifulSoup
 import requests
 from crawler.worker import app
-
+import pandas_ta as ta
+import numpy as np
 from database.main import write_etf_backtest_results_to_db, write_etf_daily_price_to_db
 
 
