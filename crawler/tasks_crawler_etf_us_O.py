@@ -1,38 +1,55 @@
 import pandas as pd
 import yfinance as yf
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from bs4 import BeautifulSoup
-import requests
+import time
+
+
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+
 from crawler.worker import app
 
 # 註冊 task, 有註冊的 task 才可以變成任務發送給 rabbitmq
 @app.task()
 def crawler_etf_us(url):
 
-    # 建立請求（可加 headers 避免被擋）
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-    }
-    resp = requests.get(url, headers=headers)
-    resp.encoding = resp.apparent_encoding
 
-    # 解析 HTML
-    soup = BeautifulSoup(resp.text, "html.parser")
-    table = soup.find("table")
 
-    # 擷取資料
-    etf_list = []
-    if table:
-        rows = table.find_all("tr")
-        for row in rows[1:]:  # 跳過表頭
-            cols = row.find_all("td")
-            if len(cols) >= 2:
-                code = cols[0].get_text(strip=True)
-                name = cols[1].get_text(strip=True)
-                region = "US"  # 手動補上國別
-                currency = "USD"  # 手動補上幣別
-                etf_list.append((code, name,region,currency))
+    options = Options()
+    options.add_argument("--headless")
+    options.add_argument("--disable-gpu")
+    options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(options=options)
+    driver.get(url)
 
-    etf_codes = [code for code, _ in etf_list]
+    # 等待表格載入
+    WebDriverWait(driver, 15).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody tr"))
+    )
+
+    html = driver.page_source
+    soup = BeautifulSoup(html, "html.parser")
+
+    etf_data = []
+
+    # 逐列抓取
+    rows = soup.select("table tbody tr")
+    for row in rows:
+        code_tag = row.select_one('a[href^="/symbols/"]')
+        name_tag = row.select_one("sup")
+        
+        if code_tag and name_tag:
+            code = code_tag.get_text(strip=True)
+            name = name_tag.get_text(strip=True)
+            etf_data.append((code, name))
+
+    driver.quit()
+
+    etf_codes = [code for code, _ in etf_data]
         
     start_date = '2015-05-01'
     end_date = pd.Timestamp.today().strftime('%Y-%m-%d')
