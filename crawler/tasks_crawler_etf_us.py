@@ -60,12 +60,12 @@ def crawler_etf_us(url):
             print(f"[⚠️ 錯誤] {r} 下載失敗：{e}")
             failed_tickers.append(r)
             continue
-        df.columns = df.columns.droplevel(1)  # 把 'Price' 這層拿掉
+    df.columns = df.columns.droplevel(1)  # 把 'Price' 這層拿掉
 
-        df.insert(0, "etf_id", r)  # 新增一欄「etf_id」
+    df.insert(0, "etf_id", r)  # 新增一欄「etf_id」
  
         #df.columns = ["etf_id","date", "dividend_per_unit"]    # 調整欄位名稱
-        columns_order = ['etf_id', 'date', 'adj_close','close','high', 'low', 'open','volume']
-        df = df[columns_order]
+    columns_order = ['etf_id', 'date', 'adj_close','close','high', 'low', 'open','volume']
+    df = df[columns_order]
     write_etf_daily_price_to_db(df)
     # return df
