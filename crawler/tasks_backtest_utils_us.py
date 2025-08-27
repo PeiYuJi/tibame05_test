@@ -153,7 +153,7 @@ def backtest_utils_us(url):
     # 指定欄位輸出順序
     desired_order = ["etf_id", "backtest_start", "backtest_end", "total_return", "cagr", "max_drawdown", "sharpe_ratio"]
     summary_df = summary_df[desired_order]
-
+    summary_df = pd.DataFrame(summary_df)
     write_etf_backtest_results_to_db(summary_df)
 
     # return summary_df
