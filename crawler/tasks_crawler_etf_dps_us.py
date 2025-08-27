@@ -53,6 +53,8 @@ def crawler_etf_dps_us(url):
         print(result_dividends.head())  # 印前幾筆就好
     else:
         print("沒有任何 ETF 有配息資料。")
-    write_etf_dividend_to_db(result_dividends)
+       # 建立 DataFrame
+    etf_dividend_df = pd.DataFrame(result_dividends)     
+    write_etf_dividend_to_db(etf_dividend_df)
 
     # return dividends_df

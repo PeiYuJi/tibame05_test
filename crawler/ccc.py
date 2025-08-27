@@ -45,6 +45,6 @@ for ticker in etf_codes:
         print(f"{ticker} 沒有配息資料")
 if all_dividends:
     result_dividends = pd.concat(all_dividends, ignore_index=True)
-    print(result_dividends.head())  # 印前幾筆就好
+    print(result_dividends)  # 印前幾筆就好
 else:
     print("沒有任何 ETF 有配息資料。")
