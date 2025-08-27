@@ -23,6 +23,8 @@ def crawler_etf_dps_us(url):
 
     # 擷取資料
     etf_list = []
+    all_dividends = []
+
     if table:
         rows = table.find_all("tr")
         for row in rows[1:]:  # 跳過表頭
@@ -43,10 +45,14 @@ def crawler_etf_dps_us(url):
             dividends_df["date"] = dividends_df["date"].dt.date  # 只保留年月日
             dividends_df.insert(0, "etf_id", ticker)  # 新增股票代碼欄位，放第一欄
             dividends_df.insert(3, "currency", "USD")  # 新增欄位，放第一欄
-
+            all_dividends.append(dividends_df)  # 加入到 list 中
         else:
             print(f"{ticker} 沒有配息資料")
-    dividends_df = pd.DataFrame(dividends_df)
-    write_etf_dividend_to_db(dividends_df)
+    if all_dividends:
+        result_dividends = pd.concat(all_dividends, ignore_index=True)
+        print(result_dividends.head())  # 印前幾筆就好
+    else:
+        print("沒有任何 ETF 有配息資料。")
+    write_etf_dividend_to_db(result_dividends)
 
     # return dividends_df
