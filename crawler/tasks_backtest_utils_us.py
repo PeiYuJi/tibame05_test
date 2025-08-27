@@ -32,9 +32,7 @@ def backtest_utils_us(url):
             if len(cols) >= 2:
                 code = cols[0].get_text(strip=True)
                 name = cols[1].get_text(strip=True)
-                region = "US"  # 手動補上國別
-                currency = "USD"  # 手動補上幣別
-                etf_list.append((code, name,region,currency))
+                etf_list.append((code, name))
 
     etf_codes = [code for code, _ in etf_list]
         

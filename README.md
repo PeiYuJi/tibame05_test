@@ -8,7 +8,7 @@ pipenv install selenium
 pipenv install beautifulsoup4
 pipenv install pandas_ta
 
-
+pip install yfinance==0.2.65 multitasking==0.0.9
 pipenv install selenium==4.27.1
 
 pipenv install python-dotenv
