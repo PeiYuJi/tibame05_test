@@ -65,5 +65,6 @@ def crawler_etf_us(url):
         #df.columns = ["etf_id","date", "dividend_per_unit"]    # 調整欄位名稱
     columns_order = ['etf_id', 'date', 'adj_close','close','high', 'low', 'open','volume']
     df = df[columns_order]
+    df = pd.DataFrame(df)
     write_etf_daily_price_to_db(df)
     # return df

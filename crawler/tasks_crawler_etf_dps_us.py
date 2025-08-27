@@ -46,7 +46,7 @@ def crawler_etf_dps_us(url):
 
         else:
             print(f"{ticker} 沒有配息資料")
-
+    dividends_df = pd.DataFrame(dividends_df)
     write_etf_dividend_to_db(dividends_df)
 
     # return dividends_df
