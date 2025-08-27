@@ -33,7 +33,7 @@ start_date = '2015-05-01'
 end_date = pd.Timestamp.today().strftime('%Y-%m-%d')
 
 failed_tickers = []
-
+all_dfs = []
 for r in etf_codes:
     print(f"正在下載：{r}")
     try:
@@ -55,10 +55,12 @@ for r in etf_codes:
         print(f"[⚠️ 錯誤] {r} 下載失敗：{e}")
         failed_tickers.append(r)
         continue
-df.columns = df.columns.droplevel(1)  # 把 'Price' 這層拿掉
+    df.columns = df.columns.droplevel(1)  # 把 'Price' 這層拿掉
+    df.insert(0, "etf_id", r)  # 新增一欄「etf_id」
+    all_dfs.append(df)
 
-df.insert(0, "etf_id", r)  # 新增一欄「etf_id」
- 
         #df.columns = ["etf_id","date", "dividend_per_unit"]    # 調整欄位名稱
 columns_order = ['etf_id', 'date', 'adj_close','close','high', 'low', 'open','volume']
-df = df[columns_order]
+result_df = pd.concat(all_dfs, ignore_index=True)
+result_df = result_df[columns_order]
+print(result_df)
