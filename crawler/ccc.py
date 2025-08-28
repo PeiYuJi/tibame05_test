@@ -48,3 +48,5 @@ if all_dividends:
     print(result_dividends)  # 印前幾筆就好
 else:
     print("沒有任何 ETF 有配息資料。")
+
+result_dividends.to_csv("etf_dividends.csv", index=False, encoding="utf-8-sig")

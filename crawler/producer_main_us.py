@@ -21,5 +21,5 @@ if __name__ == "__main__":
     # backtest_utils_us = backtest_utils_us(us_etf_url)  # 直接呼叫函式
 
     print("配息資料")
-    crawler_etf_dps_us.apply_async(kwargs={"url": us_etf_url}, queue="etfus")
+    crawler_etf_dps_us.apply_async(kwargs={"url": us_etf_url}, queue="etfus_dps")
     # crawler_etf_dps_us = crawler_etf_dps_us(us_etf_url)  # 直接呼叫函式
