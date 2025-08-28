@@ -14,12 +14,12 @@ if __name__ == "__main__":
     # etf_list_us = etf_list_us(us_etf_url)  # 直接呼叫函式
 
     print("歷史價格")
-    crawler_etf_us.apply_async(kwargs={"url": us_etf_url}, queue="etfus_price")
+    crawler_etf_us.apply_async(kwargs={"url": us_etf_url}, queue="etfus_price").get()
 
     print("歷史價格、技術指標與績效分析")
-    backtest_utils_us.apply_async(kwargs={"url": us_etf_url}, queue="etfus_utils")
+    backtest_utils_us.apply_async(kwargs={"url": us_etf_url}, queue="etfus_utils").get()
     # backtest_utils_us = backtest_utils_us(us_etf_url)  # 直接呼叫函式
 
     print("配息資料")
-    crawler_etf_dps_us.apply_async(kwargs={"url": us_etf_url}, queue="etfus_dps")
+    crawler_etf_dps_us.apply_async(kwargs={"url": us_etf_url}, queue="etfus_dps").get()
     # crawler_etf_dps_us = crawler_etf_dps_us(us_etf_url)  # 直接呼叫函式
