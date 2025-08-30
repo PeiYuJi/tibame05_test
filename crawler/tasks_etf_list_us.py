@@ -6,17 +6,15 @@ from crawler.worker import app
 
 # 註冊 task, 有註冊的 task 才可以變成任務發送給 rabbitmq
 @app.task()
-def etf_list_us(url):
+def etf_list_us(crawler_url):
     # 發送 HTTP 請求獲取網站內容
-    response = requests.get(url)
+    response = requests.get(crawler_url)
     response.encoding = 'utf-8'  # 確保中文編碼正確
 
     # 解析 HTML
     soup = BeautifulSoup(response.text, 'html.parser')
 
-    # 假設 ETF 代碼都在 href 中，並且以 'symbol' 開頭
     etf_codes = []
-
     # 解析表格數據
     rows = soup.select("table tbody tr")
     for row in rows:
