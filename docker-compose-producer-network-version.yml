@@ -3,7 +3,7 @@ version: '3.0'  # 使用 Docker Compose 的版本 3.0，適合大部分部署場
 services:
   crawler_etftw:  # 定義一個服務，名稱為 crawler_twse
     image: peiyuji/web_crawler:${DOCKER_IMAGE_VERSION}  # 使用的映像檔名稱與標籤（版本）
-    hostname: "crawler_tw_producer"  # 設定 hostname = twse
+    hostname: "etfus"  # 設定 hostname = twse
     command: pipenv run python crawler/producer_main_tw.py
     # restart: always  # 若容器停止或崩潰，自動重新啟動
     environment:
@@ -13,7 +13,7 @@ services:
 
   crawler_etfus:  # 定義一個服務，名稱為 crawler_twse
     image: peiyuji/web_crawler:${DOCKER_IMAGE_VERSION}  # 使用的映像檔名稱與標籤（版本）
-    hostname: "crawler_us_producer"  # 設定 hostname = twse
+    hostname: "etfus"  # 設定 hostname = twse
     command: pipenv run python crawler/producer_main_us.py
     # restart: always  # 若容器停止或崩潰，自動重新啟動
     environment:
