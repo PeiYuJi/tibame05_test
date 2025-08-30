@@ -5,7 +5,7 @@ from crawler.tasks_crawler_etf_dps_us import crawler_etf_dps_us
 
 
 if __name__ == "__main__":
-    us_etf_url="https://www.moneydj.com/etf/ea/et081001.djhtm"
+    us_etf_url="https://tw.tradingview.com/markets/etfs/funds-usa/"
 
     print("ETF 清單")
     etf_list_us.apply_async(

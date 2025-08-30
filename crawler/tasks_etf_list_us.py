@@ -7,33 +7,30 @@ from crawler.worker import app
 # 註冊 task, 有註冊的 task 才可以變成任務發送給 rabbitmq
 @app.task()
 def etf_list_us(url):
-
-    # 建立請求（可加 headers 避免被擋）
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
-    }
-    resp = requests.get(url, headers=headers)
-    resp.encoding = resp.apparent_encoding
+    # 發送 HTTP 請求獲取網站內容
+    response = requests.get(url)
+    response.encoding = 'utf-8'  # 確保中文編碼正確
 
     # 解析 HTML
-    soup = BeautifulSoup(resp.text, "html.parser")
-    table = soup.find("table")
+    soup = BeautifulSoup(response.text, 'html.parser')
 
-    # 擷取資料
-    etf_list = []
-    if table:
-        rows = table.find_all("tr")
-        for row in rows[1:]:  # 跳過表頭
-            cols = row.find_all("td")
-            if len(cols) >= 2:
-                code = cols[0].get_text(strip=True)
-                name = cols[1].get_text(strip=True)
-                region = "US"  # 手動補上國別
-                currency = "USD"  # 手動補上幣別
-                etf_list.append((code, name,region,currency))
+    # 假設 ETF 代碼都在 href 中，並且以 'symbol' 開頭
+    etf_codes = []
 
-    # 建立 DataFrame
-    df = pd.DataFrame(etf_list, columns=["etf_id", "etf_name", "region", "currency"])
-    write_etfs_to_db(df)
+    # 解析表格數據
+    rows = soup.select("table tbody tr")
+    for row in rows:
+        code_tag = row.select_one('a[href^="/symbols/"]')
+        name_tag = row.select_one("sup")
+        
+        if code_tag and name_tag:
+            code = code_tag.get_text(strip=True)
+            name = name_tag.get_text(strip=True)
+            region = "US"  # 手動補上國別
+            currency = "USD"  # 手動補上幣別
+            etf_codes.append((code, name, region, currency))
 
-    # return df
+    # 將資料放入 DataFrame
+    etf_list_df = pd.DataFrame(etf_codes, columns=["etf_id", "etf_name", "region", "currency"])
+    write_etfs_to_db(etf_list_df)
+

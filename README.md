@@ -22,7 +22,7 @@ source venv/bin/activate
 安裝套件：
 pip install beautifulsoup4
 
-
+pip install playwright
 
 # 環境設定
 

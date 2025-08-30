@@ -1,0 +1,101 @@
+etf_id,etf_name,region,currency
+VOO,Vanguard S&P 500 ETF,US,USD
+IVV,iShares Core S&P 500 ETF,US,USD
+SPY,SPDR S&P 500 ETF Trust,US,USD
+VTI,Vanguard Total Stock Market ETF,US,USD
+QQQ,Invesco QQQ Trust Series I,US,USD
+VUG,Vanguard Growth ETF,US,USD
+VEA,Vanguard FTSE Developed Markets ETF,US,USD
+IEFA,iShares Core MSCI EAFE ETF,US,USD
+VTV,Vanguard Value ETF,US,USD
+BND,Vanguard Total Bond Market ETF,US,USD
+AGG,iShares Core U.S. Aggregate Bond ETF,US,USD
+IWF,iShares Russell 1000 Growth ETF,US,USD
+GLD,SPDR Gold Shares,US,USD
+VXUS,Vanguard Total International Stock ETF,US,USD
+VGT,Vanguard Information Technology ETF,US,USD
+IEMG,iShares Core MSCI Emerging Markets ETF,US,USD
+IJH,iShares Core S&P Mid-Cap ETF,US,USD
+VWO,Vanguard FTSE Emerging Markets ETF,US,USD
+VIG,Vanguard Dividend Appreciation ETF,US,USD
+VO,Vanguard Mid-Cap ETF,US,USD
+IJR,iShares Core S&P Small Cap ETF,US,USD
+XLK,Technology Select Sector SPDR Fund,US,USD
+SPLG,SPDR Portfolio S&P 500 ETF,US,USD
+IBIT,iShares Bitcoin Trust ETF,US,USD
+ITOT,iShares Core S&P Total U.S. Stock Market ETF,US,USD
+RSP,Invesco S&P 500 Equal Weight ETF,US,USD
+SCHD,Schwab US Dividend Equity ETF,US,USD
+BNDX,Vanguard Total International Bond ETF,US,USD
+IWM,iShares Russell 2000 ETF,US,USD
+VB,Vanguard Small-Cap ETF,US,USD
+EFA,iShares MSCI EAFE ETF,US,USD
+VYM,Vanguard High Dividend Yield Index ETF,US,USD
+IVW,iShares S&P 500 Growth ETF,US,USD
+IWD,iShares Russell 1000 Value ETF,US,USD
+QQQM,Invesco NASDAQ 100 ETF,US,USD
+SCHX,Schwab U.S. Large-Cap ETF,US,USD
+VCIT,Vanguard Intermediate-Term Corporate Bond ETF,US,USD
+SGOV,iShares 0-3 Month Treasury Bond ETF,US,USD
+XLF,Financial Select Sector SPDR Fund,US,USD
+QUAL,iShares MSCI USA Quality Factor ETF,US,USD
+VT,Vanguard Total World Stock ETF,US,USD
+SCHF,Schwab International Equity ETF,US,USD
+IAU,iShares Gold Trust,US,USD
+VEU,Vanguard FTSE All-World ex-US Index Fund,US,USD
+SCHG,Schwab U.S. Large-Cap Growth ETF,US,USD
+VNGDF,Vanguard S&P 500 UCITS ETF,US,USD
+IXUS,iShares Core MSCI Total International Stock ETF,US,USD
+TLT,iShares 20+ Year Treasury Bond ETF,US,USD
+VV,Vanguard Large-Cap ETF,US,USD
+IWR,iShares Russell Midcap ETF,US,USD
+IWB,iShares Russell 1000 ETF,US,USD
+BIL,SPDR Bloomberg 1-3 Month T-Bill ETF,US,USD
+JEPI,JPMorgan Equity Premium Income ETF,US,USD
+IVE,iShares S&P 500 Value ETF,US,USD
+MBB,iShares MBS ETF,US,USD
+SPYG,SPDR Portfolio S&P 500 Growth ETF,US,USD
+DIA,SPDR Dow Jones Industrial Average ETF Trust,US,USD
+VCSH,Vanguard Short-Term Corporate Bond ETF,US,USD
+BSV,Vanguard Short-Term Bond ETF,US,USD
+MUB,iShares National Muni Bond ETF,US,USD
+VTEB,Vanguard Tax-Exempt Bond ETF,US,USD
+DFAC,Dimensional U.S. Core Equity 2 ETF,US,USD
+SCHB,Schwab U.S. Broad Market ETF,US,USD
+IEF,iShares 7-10 Year Treasury Bond ETF,US,USD
+VNQ,Vanguard Real Estate ETF,US,USD
+IUSB,iShares Core Total USD Bond Market ETF,US,USD
+XLV,Health Care Select Sector SPDR Fund,US,USD
+DGRO,iShares Core Dividend Growth ETF,US,USD
+JPST,JPMorgan Ultra-Short Income ETF,US,USD
+VGIT,Vanguard Intermediate-Term Treasury ETF,US,USD
+VONG,Vanguard Russell 1000 Growth ETF,US,USD
+VBR,Vanguard Small Cap Value ETF,US,USD
+LQD,iShares iBoxx $ Investment Grade Corporate Bond ETF,US,USD
+JEPQ,JPMorgan NASDAQ Equity Premium Income ETF,US,USD
+MGK,Vanguard Mega Cap Growth ETF,US,USD
+SPDW,SPDR Portfolio Developed World ex-US ETF,US,USD
+SPYV,SPDR Portfolio S&P 500 Value ETF,US,USD
+GOVT,iShares U.S. Treasury Bond ETF,US,USD
+EFV,iShares MSCI EAFE Value ETF,US,USD
+SMH,VanEck Semiconductor ETF,US,USD
+XLE,Energy Select Sector SPDR Fund,US,USD
+VGK,Vanguard FTSE Europe ETF,US,USD
+TQQQ,ProShares UltraPro QQQ,US,USD
+VGFPF,Vanguard S&P 500 UCITS ETF,US,USD
+USHY,iShares Broad USD High Yield Corporate Bond ETF,US,USD
+XLC,Communication Services Select Sector SPDR Fund,US,USD
+JAAA,Janus Henderson AAA CLO ETF,US,USD
+BIV,Vanguard Intermediate-Term Bond ETF,US,USD
+IUSG,iShares Core S&P U.S. Growth ETF,US,USD
+SHY,iShares 1-3 Year Treasury Bond ETF,US,USD
+VXF,Vanguard Extended Market ETF,US,USD
+MDY,SPDR S&P Midcap 400 ETF Trust,US,USD
+XLI,Industrial Select Sector SPDR Fund,US,USD
+XLY,Consumer Discretionary Select Sector SPDR Fund,US,USD
+USMV,iShares MSCI USA Min Vol Factor ETF,US,USD
+IYW,iShares U.S. Technology ETF,US,USD
+VGSH,Vanguard Short-Term Treasury ETF,US,USD
+DYNF,iShares U.S. Equity Factor Rotation Active ETF,US,USD
+FBTC,Fidelity Wise Origin Bitcoin Fund,US,USD
+OEF,iShares S&P 100 ETF,US,USD
