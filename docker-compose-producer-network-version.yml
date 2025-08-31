@@ -5,6 +5,15 @@ services:
     image: peiyuji/web_crawler:${DOCKER_IMAGE_VERSION}  # 使用的映像檔名稱與標籤（版本）
     hostname: "etftw"  # 設定 hostname = twse
     command: pipenv run python crawler/producer_main_tw.py
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        # 設定在
+        # node label producer = true 的機器上執行
+        constraints: [node.labels.producer==true]
+    restart: on-failure  # 失敗才重啟, 不要頻繁重啟, 發送任務
     # restart: always  # 若容器停止或崩潰，自動重新啟動
     environment:
       - TZ=Asia/Taipei  # 設定時區為台北（UTC+8）
@@ -16,6 +25,15 @@ services:
     hostname: "etfus"  # 設定 hostname = twse
     command: pipenv run python crawler/producer_main_us.py
     # restart: always  # 若容器停止或崩潰，自動重新啟動
+    # swarm 設定
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        # 設定在
+        # node label producer = true 的機器上執行
+        constraints: [node.labels.producer==true]
+    restart: on-failure  # 失敗才重啟, 不要頻繁重啟, 發送任務
     environment:
       - TZ=Asia/Taipei  # 設定時區為台北（UTC+8）
     networks:
