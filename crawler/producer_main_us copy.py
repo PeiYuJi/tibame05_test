@@ -1,0 +1,25 @@
+from crawler.tasks_etf_list_us import etf_list_us  
+from crawler.tasks_crawler_etf_us import crawler_etf_us
+from crawler.tasks_backtest_utils_us import backtest_utils_us    
+from crawler.tasks_crawler_etf_dps_us import crawler_etf_dps_us      
+
+
+if __name__ == "__main__":
+    crawler_url="https://tw.tradingview.com/markets/etfs/funds-usa/"
+
+    print("ETF 清單")
+    etf_list_us.apply_async(
+        kwargs={"crawler_url": crawler_url}, queue="etfus"
+    ).get()  # 使用 apply_async 發送任務到 RabbitMQ
+    # etf_list_us = etf_list_us(us_etf_url)  # 直接呼叫函式
+
+    print("歷史價格")
+    crawler_etf_us.apply_async(kwargs={"crawler_url": crawler_url}, queue="etfus_price").get()
+
+    print("歷史價格、技術指標與績效分析")
+    backtest_utils_us.apply_async(kwargs={"crawler_url": crawler_url}, queue="etfus_utils").get()
+    # backtest_utils_us = backtest_utils_us(us_etf_url)  # 直接呼叫函式
+
+    print("配息資料")
+    crawler_etf_dps_us.apply_async(kwargs={"crawler_url": crawler_url}, queue="etfus_dps").get()
+    # crawler_etf_dps_us = crawler_etf_dps_us(us_etf_url)  # 直接呼叫函式
