@@ -1,14 +1,43 @@
 import pandas as pd
 import yfinance as yf
+from bs4 import BeautifulSoup
+import requests
 from crawler.worker import app
+
 from database.main import write_etf_dividend_to_db
 
 # 註冊 task, 有註冊的 task 才可以變成任務發送給 rabbitmq
 @app.task()
-def crawler_etf_dps_us(etf_list_df):
-    all_dividends = []  
-    for etf in etf_list_df:
-        ticker = etf['etf_id']
+def crawler_etf_dps_us(url):
+
+    # 建立請求（可加 headers 避免被擋）
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    }
+    resp = requests.get(url, headers=headers)
+    resp.encoding = resp.apparent_encoding
+
+    # 解析 HTML
+    soup = BeautifulSoup(resp.text, "html.parser")
+    table = soup.find("table")
+
+    # 擷取資料
+    etf_list = []
+    all_dividends = []
+
+    if table:
+        rows = table.find_all("tr")
+        for row in rows[1:]:  # 跳過表頭
+            cols = row.find_all("td")
+            if len(cols) >= 2:
+                code = cols[0].get_text(strip=True)
+                name = cols[1].get_text(strip=True)
+                etf_list.append((code, name))
+
+    etf_codes = [code for code, _ in etf_list]
+
+    for ticker in etf_codes:
+        # 抓取配息資料
         dividends = yf.Ticker(ticker).dividends
         if not dividends.empty:
             dividends_df = dividends.reset_index()
@@ -27,3 +56,5 @@ def crawler_etf_dps_us(etf_list_df):
        # 建立 DataFrame
     etf_dividend_df = pd.DataFrame(result_dividends)     
     write_etf_dividend_to_db(etf_dividend_df)
+
+    # return dividends_df

@@ -31,4 +31,4 @@ def etf_list_us(crawler_url):
     # 將資料放入 DataFrame
     etf_list_df = pd.DataFrame(etf_codes, columns=["etf_id", "etf_name", "region", "currency"])
     write_etfs_to_db(etf_list_df)
-
+    return etf_list_df.to_dict(orient="records")
