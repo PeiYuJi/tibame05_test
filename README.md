@@ -224,3 +224,7 @@ DOCKER_IMAGE_VERSION=0.0.10. docker stack deploy --with-registry-auth -c docker-
 
      wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y ./google-chrome-stable_current_amd64.debv
+
+
+
+DOCKER_IMAGE_VERSION=0.0.10 docker --log-level=debug stack deploy --with-registry-auth -c docker-compose-producer-network-version.yml upload
