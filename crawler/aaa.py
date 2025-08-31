@@ -1,55 +1,27 @@
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from bs4 import BeautifulSoup
+from crawler.tasks_etf_list_us import etf_list_us  
+from crawler.tasks_crawler_etf_us import crawler_etf_us
+from crawler.tasks_backtest_utils_us import backtest_utils_us    
+from crawler.tasks_crawler_etf_dps_us import crawler_etf_dps_us      
+from celery import chain, group
 
-import pandas as pd
-from database.main import write_etfs_to_db
+if __name__ == "__main__":
+    crawler_url = "https://tw.tradingview.com/markets/etfs/funds-usa/"
 
-from crawler.worker import app
+    workflow = chain(
+        # 指定 etf_list_us 送到 etfus 隊列
+        etf_list_us.s(crawler_url=crawler_url).set(queue='etfus'),
 
-# 註冊 task, 有註冊的 task 才可以變成任務發送給 rabbitmq
-
-
-options = Options()
-options.add_argument("--headless")
-options.add_argument("--disable-gpu")
-options.add_argument("--no-sandbox")
-
-driver = webdriver.Chrome(options=options)
-driver.get(url)
-
-    # 等待表格載入
-    WebDriverWait(driver, 15).until(
-        EC.presence_of_element_located((By.CSS_SELECTOR, "table tbody tr"))
+        group(
+            # 以下每個子任務指定不同隊列
+            crawler_etf_us.s().set(queue='etfus_price'),         # 價格資料
+            backtest_utils_us.s().set(queue='etfus_utils'),      # 技術指標和績效分析
+            crawler_etf_dps_us.s().set(queue='etfus_dps')        # 配息資料
+        )
     )
 
-    html = driver.page_source
-    soup = BeautifulSoup(html, "html.parser")
+    # 發送任務到 RabbitMQ
+    result = workflow.apply_async()
+    print("任務已發送，正在處理中...")
 
-    etf_data = []
-
-    # 逐列抓取
-    rows = soup.select("table tbody tr")
-    for row in rows:
-        code_tag = row.select_one('a[href^="/symbols/"]')
-        name_tag = row.select_one("sup")
-        
-        if code_tag and name_tag:
-            code = code_tag.get_text(strip=True)
-            name = name_tag.get_text(strip=True)
-            region = "US"  # 手動補上國別
-            currency = "USD"  # 手動補上幣別
-            etf_data.append((code, name,region,currency))
-
-    driver.quit()
-
-    df = pd.DataFrame(etf_data, columns=["etf_id", "etf_name", "region", "currency"])
-
-    print(f"etf_List_us: {df.head()}")
-
-    write_etfs_to_db(df)
-
-    # return df
+    # 阻塞等待所有任務完成，這行可根據需求選擇要不要加
+    result.get()
