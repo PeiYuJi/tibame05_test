@@ -3,8 +3,9 @@ from pathlib import Path
 import os
 
 
-# 載入 .env 檔案
-load_dotenv()
+# 指定 .env 路徑
+env_path = Path(__file__).resolve().parents[1] / ".env"
+load_dotenv(dotenv_path=env_path)
 
 MYSQL_HOST = os.getenv("MYSQL_HOST", "35.208.165.47")
 MYSQL_PORT = int(os.getenv("MYSQL_PORT", 3306))
